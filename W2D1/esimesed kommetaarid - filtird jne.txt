@@ -1,0 +1,139 @@
+-- 1. VALIMINE
+
+-- 1.1. Valime esimesed 10 rida tabeliga tutvumiseks - LIMIT
+SELECT *
+FROM SalesTable
+LIMIT 10;
+
+SELECT *
+FROM SalesRepTable
+LIMIT 10;
+
+SELECT *
+FROM BudgetSalesRep
+LIMIT 10;
+
+-- 1.2. Valime konkreetsed tulbad - tulba nimed eraldada komadega
+
+SELECT 
+	SaleID,
+	Date,
+	CustomerID
+FROM SalesTable
+LIMIT 10;
+
+
+SELECT
+	Budget
+From BudgetSalesRep;
+
+-- 1.3. Valime unikaalsed väärtused - DISTINCT käsk
+
+
+Select DISTINCT ProductID
+FROM SalesTable;
+
+
+-- Kes on meie unikaalsed kliendid
+
+SELECT DISTINCT CustomerID
+FROM SalesTable
+ORDER BY CustomerId ASC;
+
+
+
+
+-- 2. FILTREERIMINE - kindlate ridade valimine
+
+-- 2.1. FILTREERIMINE - KINDEL VÄÄRTUS: Valime kindla toote müügid - WHERE käsk tekstilise välja puhul
+
+
+SELECT *
+from SalesTable
+WHERE ProductID = 'P001';
+
+
+-- 2.2. FILTREERIMINE - VÄLISTAMINE: Välistame kindla toote müügid - WHERE käsk tekstilise välja puhul
+
+SELECT *
+FROM SalesTable
+where ProductId != 'P001';
+
+
+-- 2.3. FILTREERIMINE - NUMBRLISE VÄÄRTUSE VÕRDLEMINE: Valime ainult müügid, kus kogus on suurem viiest - WHERE käsk numbrilise välja puhul (teised võrdlused: <, <= , >=)
+
+SELECT *
+From SalesTable
+WHERE quantity > 5; -- töötab nii '' kui ka ilma numbri puhu
+
+
+
+-- 2.4. FILTREERIMINE MITME TUNNUSE ALUSEL: Valime kindla toote müügid kindlale kliendile - WHERE ning AND
+
+SELECT *
+FROM SalesTable
+WHERE CustomerID = 'C002'
+AND ProductID = 'P004';
+
+
+-- 2.5. FILTREERIMINE MITME TUNNUSE ALUSEL: Valime kindla toote müügid VÕI kindla kliendi müügid - WHERE ning OR
+SELECT *
+FROM SalesTable
+WHERE ProductID = 'P003' OR customerID = 'C003';
+
+
+
+-- 2.6. FILTREERIMINE VAHEMIKU ALUSEL: Valime ainult müügid, kus kogus on 5 ja 8 vahepeal - BETWEEN
+
+
+SELECT *
+FROM SalesTable
+WHERE quantity BETWEEN 5 AND 8;
+
+
+
+-- 2.7. FILTREERIMINE - VALIME MITU VÄÄRTUST: Valime mitme kindla toote müügid - IN
+
+SELECT *
+FROM SalesTable
+WHERE ProductId IN ('P001','P002','P003');  -- võib kasutada ka ORi
+
+
+-- 2.8. FILTREERIMINE OSALISE TEKSTI alusel: Valime kõik tooted, mille ID algab 'P00' - LIKE ja %
+
+SELECT *
+FROM SalesTable
+WHERE productid like 'P00%'; --_näitab seda, et oleks vaid 1 väärtus pärast antud sõne
+
+
+-- 2.9. FILTREERIMINE - TÕSTUTUNDLIKKUSE EEMALDAMINE: Valime kõik tooted, mille ID algab 'P00' või 'p000' - LOWER või UPPER käsk
+SELECT *
+FROM SalesTable
+WHERE lower (ProductID) like 'p00%';
+
+
+
+-- 2.10. FILTREERIMINE - MITME TINGIMUSE KOMBINEERIMINE: Valime müügid, mis esimese toote puhul on kogusega 2 ja teise toote puhul on kogusega 5 - SULGUDE KASUTAMINE
+SELECT *
+FROM SalesTable
+WHERE (quantity = 2 and ProductId = 'P001') or (quantity = 5 and ProductID = 'P003');
+	
+
+
+-- 3. SORTEERIMINE: Sorteerime suurema toote hinnaga müügid ette poole - ORDER BY
+
+Select *
+FROM SalesTable
+ORDER BY  UnitPrice DESC, quantity DESC;
+
+-- 4. ALIAS - TULBALE UUS NIMI VÄLJUNDIS: Date tulbast SalesDate tulp väljundis - AS
+
+SELECT date  AS SalesDate
+FROM SalesTable;
+
+
+/*
+5. Mitmerealise kommentaari lisamine:
+kui tahad mitu rida kommentaari kirjutada, siis alusta / ja * ning lõpeta * ja /
+*/
+
