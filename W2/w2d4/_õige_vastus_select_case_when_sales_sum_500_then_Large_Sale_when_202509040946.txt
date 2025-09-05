@@ -1,0 +1,5 @@
+|sales_category|number_of_sales|sales_sum|
+|--------------|---------------|---------|
+|Small Sale    |6,812          |831,733  |
+|Medium Sale   |3,452          |1,238,812|
+|Large Sale    |1,505          |964,805  |
