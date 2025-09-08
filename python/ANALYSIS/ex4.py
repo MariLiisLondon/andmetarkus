@@ -3,7 +3,6 @@
 # paigalda pip install tools.api_request
 
 import requests
-import json
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -38,14 +37,25 @@ for women in data_woman[1]:
 
 df = pd.DataFrame(values)
 
+df['men_population'] = df['population'] - df['women_population']
+
+
 # väljastan esimesed read
 print(df.head())
 
 # joonistamise osa
-df.plot(x='year', y=['population', 'women_population'], kind='line', marker='o',
+df.plot(x='year', y=['population', 'women_population', 'men_population'], kind='line',
         title='Eesti rahvaarv aastatel 1960-2021', xlabel='Aasta', ylabel='Inimeste arv')
+plt.ylim(bottom=0)  # y telg algab nullist
+plt.xlim()  # x telg lõpeb 2021
 
+
+plt.savefig('rik_rahvastik.png')
 plt.show()
+
+
+
+
 
 
 # print(df)
